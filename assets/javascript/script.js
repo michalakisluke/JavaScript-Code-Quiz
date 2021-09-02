@@ -1,41 +1,61 @@
 var questionCount = 0;
 var ques = [
-    {question: "How do you send an alert to the screen?",
+    {
+     question: "How do you send an alert to the screen?",
      choices: ["alert()", "confirm()", "function()", "addEventListener"],
-     answer: "alert()"},
+     answer: "alert()"
+    },
         
-    {question: "Where can you test JavaScript commands and view errors?",
+    {
+     question: "Where can you test JavaScript commands and view errors?",
      choices: ["Chrome devTools", "Nowhere", "GitHub", "W3 Schools"],
-     answer: "Chrome devTools"},
+     answer: "Chrome devTools"
+    },
 
-     {question: "How can you get a webpage to run JavaScript",
+    {
+     question: "How can you get a webpage to run JavaScript",
      choices: ["It's automatic", "Use <script> in the HTML", "Use <script> in the CSS", "You can't"],
-     answer: "alert()"},
+     answer: "alert()"
+    },
 
-     {question: "How do you make buttons clickable?",
+    {
+     question: "How do you make buttons clickable?",
      choices: ["It's part of the HTML <button>", "confirm()", "addEventListener()", "querySelector()"],
-     answer: "addEventListener()"},
+     answer: "addEventListener()"
+    },
 
-     {question: "Is JavaScript fun?",
+    {
+     question: "Is JavaScript fun?",
      choices: ["Of course!", "Not at all", "What's JavaScript", "Maybe, but it is useful"],
-     answer: "Maybe, but it is useful"}
+     answer: "Maybe, but it is useful"
+    }
 ]
 
+function gamePlay() {
+    
+}
+
+var saveScore = function() {
+
+}
 
 function countdown() {
-    var timeLeft = 10;
+    var timeLeft = 120;
     var timer = setInterval(function() {
-      if(timer > 1) {
+      if (timeLeft > 1) {
+        document.getElementById("game-time").innerHTML = "Time Remaining: " + timeLeft + " seconds left!";
         timeLeft--
-        document.getElementById("game-time").innerHTML = "Time Remaining: " + time + " seconds";
-      }
+        }
       else if (timeLeft === 1) {
-        document.getElementById("game-time").innerHTML = "Time Remaining: " + time + " second";
+        document.getElementById("game-time").innerHTML = "Time Remaining: " + timeLeft + " second left!";
         timeLeft--;
-      }
+        }
+      else if (timeLeft === 0) {
+        document.getElementById("game-time").innerHTML = "Time Remaining: " + timeLeft + " seconds left!";         
+        clearInterval(timer);
+        }
     }, 1000);
   }
 
-function startGame() {
-    document.getElementById("#start-button").addEventListener("click", countdown);
-}
+document.getElementById("start-button").addEventListener("click", countdown);
+document.getElementById("start-button").addEventListener("click", gamePlay);
