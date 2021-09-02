@@ -24,8 +24,6 @@ var ques = [
 
 function countdown() {
     var timeLeft = 10;
-  
-    // TODO: Use the `setInterval()` method to call a function to be executed every 1000 milliseconds
     var timer = setInterval(function() {
       if(timer > 1) {
         timeLeft--
