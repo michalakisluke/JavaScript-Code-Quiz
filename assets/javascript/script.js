@@ -1,5 +1,6 @@
 var choiceLength = 4;
 var globalQuestionIndex = 0;
+
 var ques = [
     {
      question: "How do you send an alert to the screen?",
@@ -32,24 +33,42 @@ var ques = [
     }
 ]
 
-function gamePlay() {
-  document.querySelector("#start-button").innerHTML = "Submit"
-  document.querySelector("#start-button").removeEventListener("click", countdown);
-  document.querySelector("#start-button").removeEventListener("click", gamePlay);
-  document.getElementById("start-button").setAttribute("id", "submit-button");
+function gamePlayStart() {
+  // Modify page format, prep for introducing question
+  document.querySelector("#start-button").remove();
   document.getElementById("title").setAttribute("id", "question");
+  //Assign new inner HTML to question, remove <p> element
   document.getElementById("question").innerHTML = ques[globalQuestionIndex].question;
   document.getElementById("start-prompt").remove();
-    for (var j = 0; j < choiceLength;) {
-      var ansList = document.createElement("ol");
-      ansList.innerHTML = ques[globalQuestionIndex].choices[j];
-      ansList.setAttribute("id", "ans-choice");
-      document.getElementById("answers").appendChild(ansList);
-      globalQuestionIndex++;
-    }
+  //Generate Choices, append to element
+  var ansButtonA = document.createElement("button");
+  var ansButtonB = document.createElement("button");
+  var ansButtonC = document.createElement("button");
+  var ansButtonD = document.createElement("button");
+  ansButtonA.innerHTML = ques[globalQuestionIndex].choices[0];
+  ansButtonB.innerHTML = ques[globalQuestionIndex].choices[1];
+  ansButtonC.innerHTML = ques[globalQuestionIndex].choices[2];
+  ansButtonD.innerHTML = ques[globalQuestionIndex].choices[3];
+  ansButtonA.setAttribute("id", "ans-choice-buttonA");
+  ansButtonB.setAttribute("id", "ans-choice-buttonB");
+  ansButtonC.setAttribute("id", "ans-choice-buttonC");
+  ansButtonD.setAttribute("id", "ans-choice-buttonD");
+  document.getElementById("choice-a").appendChild(ansButtonA);
+  document.getElementById("choice-b").appendChild(ansButtonB);
+  document.getElementById("choice-c").appendChild(ansButtonC);
+  document.getElementById("choice-d").appendChild(ansButtonD);
+  //Verify answer
+  var ansChoice = document.getElementById("choice-a").addEventListener("click", ques[globalQuestionIndex].choices[0]);
+  var ansChoice = document.getElementById("choice-b").addEventListener("click", ques[globalQuestionIndex].choices[1]);
+  var ansChoice = document.getElementById("choice-c").addEventListener("click", ques[globalQuestionIndex].choices[2]);
+  var ansChoice = document.getElementById("choice-d").addEventListener("click", ques[globalQuestionIndex].choices[3]);
+  if (ansChoice === ques[globalQuestionIndex].answer) {
+    alert("right test");
   }
-
-
+  else {
+    alert("wrong test");
+  }
+}
 
 var saveScore = function() {
 
@@ -74,4 +93,5 @@ function countdown() {
   }
 
 document.getElementById("start-button").addEventListener("click", countdown);
-document.getElementById("start-button").addEventListener("click", gamePlay);
+document.getElementById("start-button").addEventListener("click", gamePlayStart);
+document.getElementById("submit-button").addEventListener("click", gamePlay);
