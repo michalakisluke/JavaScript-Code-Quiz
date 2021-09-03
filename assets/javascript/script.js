@@ -42,8 +42,9 @@ function gamePlay() {
     document.getElementById("question").innerHTML = ques[i].question;
     document.getElementById("start-prompt").remove();
     for (j = 0; j < choiceLength;) {
-      var ansList = document.createElement("li").setAttribute("id", "ans-choice");
-      document.querySelector("ans-choice").innerHTML = ques.choices[j];
+      var ansList = document.createElement("li");
+      ansList.innerHTML = ques.choices[j];
+      ansList.setAttribute("id", "ans-choice");
       //var ansButton = document.createElement("button").setAttribute("id", "ans-choice-button");
       document.getElementById("answers").appendChild(ansList);
     }
