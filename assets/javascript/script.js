@@ -1,5 +1,6 @@
 var choiceLength = 4;
 var globalQuestionIndex = 0;
+var timeLeft = 60;
 
 var ques = [
     {
@@ -98,6 +99,8 @@ function gamePlayStart() {
     document.getElementById("choice-c").addEventListener("click", checkAnswer);
     document.getElementById("choice-d").addEventListener("click", checkAnswer);
   }
+  gamePlayStart();
+  globalQuestionIndex++;
 }
 
 function checkAnswer(event) {
@@ -107,22 +110,19 @@ function checkAnswer(event) {
   console.log(ques[globalQuestionIndex].answer)
   if (ansChoice === ques[globalQuestionIndex].answer) {
     alert("right test");
-    globalQuestionIndex++;
     console.log(globalQuestionIndex);
   }
   else {
     alert("wrong test");
-    globalQuestionIndex++;
     console.log(globalQuestionIndex);
   }
 }
 
-var saveScore = function() {
+function saveScore() {
 
 }
 
 function countdown() {
-    var timeLeft = 120;
     var timer = setInterval(function() {
       if (timeLeft > 1) {
         document.getElementById("game-time").innerHTML = "Time Remaining: " + timeLeft + " seconds left!";
