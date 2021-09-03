@@ -1,4 +1,5 @@
 var questionCount = 5;
+var answerCount = 4;
 var ques = [
     {
      question: "How do you send an alert to the screen?",
@@ -37,10 +38,14 @@ function gamePlay() {
   document.querySelector("#start-button").removeEventListener("click", gamePlay);
   document.getElementById("start-button").setAttribute("id", "submit-button");
   document.getElementById("title").setAttribute("id", "question");
-  
+
   for (i = 0; i < questionCount.length; i++) {
     document.getElementById("question").innerHTML = ques[i][1];
-    
+    for (j = 0; j < answerCount.length; j++) {
+      var answer = document.createElement("li");
+      var answerClick = document.createElement("button");
+      
+    }
   }
 }
 
