@@ -1,4 +1,5 @@
 var choiceLength = 4;
+var globalQuestionIndex = 0;
 var ques = [
     {
      question: "How do you send an alert to the screen?",
@@ -20,7 +21,7 @@ var ques = [
 
     {
      question: "How do you make buttons clickable?",
-     choices: ["It's part of the HTML <button>", "confirm()", "addEventListener()", "querySelector()"],
+     choices: ["It's part of the HTML button element", "confirm()", "addEventListener()", "querySelector()"],
      answer: "addEventListener()"
     },
 
@@ -37,20 +38,17 @@ function gamePlay() {
   document.querySelector("#start-button").removeEventListener("click", gamePlay);
   document.getElementById("start-button").setAttribute("id", "submit-button");
   document.getElementById("title").setAttribute("id", "question");
-
-  for (i = 0; i < ques.length;) {
-    document.getElementById("question").innerHTML = ques[i].question;
-    document.getElementById("start-prompt").remove();
-    for (j = 0; j < choiceLength;) {
-      var ansList = document.createElement("li");
-      ansList.innerHTML = ques.choices[j];
+  document.getElementById("question").innerHTML = ques[globalQuestionIndex].question;
+  document.getElementById("start-prompt").remove();
+    for (var j = 0; j < choiceLength;) {
+      var ansList = document.createElement("ol");
+      ansList.innerHTML = ques[globalQuestionIndex].choices[j];
       ansList.setAttribute("id", "ans-choice");
-      //var ansButton = document.createElement("button").setAttribute("id", "ans-choice-button");
       document.getElementById("answers").appendChild(ansList);
+      globalQuestionIndex++;
     }
-
   }
-}
+
 
 
 var saveScore = function() {
