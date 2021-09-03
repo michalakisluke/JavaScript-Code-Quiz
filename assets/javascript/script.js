@@ -53,15 +53,26 @@ function gamePlayStart() {
   ansButtonB.setAttribute("id", "ans-choice-buttonB");
   ansButtonC.setAttribute("id", "ans-choice-buttonC");
   ansButtonD.setAttribute("id", "ans-choice-buttonD");
+  ansButtonA.setAttribute("value", ques[globalQuestionIndex].choices[0]);
+  ansButtonB.setAttribute("value", ques[globalQuestionIndex].choices[1]);
+  ansButtonC.setAttribute("value", ques[globalQuestionIndex].choices[2]);
+  ansButtonD.setAttribute("value", ques[globalQuestionIndex].choices[3]);
   document.getElementById("choice-a").appendChild(ansButtonA);
   document.getElementById("choice-b").appendChild(ansButtonB);
   document.getElementById("choice-c").appendChild(ansButtonC);
   document.getElementById("choice-d").appendChild(ansButtonD);
   //Verify answer
-  var ansChoice = document.getElementById("choice-a").addEventListener("click", ques[globalQuestionIndex].choices[0]);
-  var ansChoice = document.getElementById("choice-b").addEventListener("click", ques[globalQuestionIndex].choices[1]);
-  var ansChoice = document.getElementById("choice-c").addEventListener("click", ques[globalQuestionIndex].choices[2]);
-  var ansChoice = document.getElementById("choice-d").addEventListener("click", ques[globalQuestionIndex].choices[3]);
+  document.getElementById("choice-a").addEventListener("click", checkAnswer);
+  document.getElementById("choice-b").addEventListener("click", checkAnswer);
+  document.getElementById("choice-c").addEventListener("click", checkAnswer);
+  document.getElementById("choice-d").addEventListener("click", checkAnswer);
+}
+
+function checkAnswer(event) {
+  event.preventDefault();
+  var ansChoice = document.getElementsByTagName("button").value;
+  console.log(ansChoice);
+  console.log(ques[globalQuestionIndex].answer)
   if (ansChoice === ques[globalQuestionIndex].answer) {
     alert("right test");
   }
@@ -94,4 +105,4 @@ function countdown() {
 
 document.getElementById("start-button").addEventListener("click", countdown);
 document.getElementById("start-button").addEventListener("click", gamePlayStart);
-document.getElementById("submit-button").addEventListener("click", gamePlay);
+//document.getElementById("submit-button").addEventListener("click", gamePlay);
