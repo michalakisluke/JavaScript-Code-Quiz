@@ -33,11 +33,17 @@ var ques = [
 
 function gamePlay() {
   document.querySelector("#start-button").innerHTML = "Submit"
+  document.querySelector("#start-button").removeEventListener("click", countdown);
+  document.querySelector("#start-button").removeEventListener("click", gamePlay);
   document.getElementById("start-button").setAttribute("id", "submit-button");
-  for (i = 0; i < questionCount; i++) {
-
+  document.getElementById("title").setAttribute("id", "question");
+  
+  for (i = 0; i < questionCount.length; i++) {
+    document.getElementById("question").innerHTML = ques[i][1];
+    
   }
 }
+
 
 var saveScore = function() {
 
