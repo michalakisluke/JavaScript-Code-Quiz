@@ -1,15 +1,23 @@
 var choiceLength = 4;
 var globalQuestionIndex = 0;
 var timeLeft = 60;
-var scoresArray = localStorage.getItem(scoresArray);
-
+let scoresArray; 
 
 function checkScore() {
-  localStorage.getItem(scoresArray);
+  var retrieve = localStorage.getItem('score');
+  scoresArray = retrieve;
   if (scoresArray === null) {
     scoresArray = [];
-  }
+  } 
 }
+
+console.log(localStorage.getItem('score'));
+console.log(scoresArray);
+
+checkScore();
+
+console.log(localStorage.getItem('score'));
+console.log(scoresArray);
 
 var ques = [
     {
@@ -192,8 +200,9 @@ function saveScores() {
 function storeData() {
   var savedUsername = document.getElementById("username-text-box").value;
   var score = timeLeft + 1;
-  checkScore();
+  console.log(scoresArray);
   scoresArray.push([savedUsername, score]);
+  console.log(scoresArray);
   localStorage.setItem("score", scoresArray);
 }
 
