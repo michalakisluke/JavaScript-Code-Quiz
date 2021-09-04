@@ -167,14 +167,19 @@ function saveScores() {
   document.querySelector("#choice-c").remove();
   document.querySelector("#choice-d").remove();
   var usernamePrompt = document.createElement("p");
-  var usernameTextBox = document.createElement("input").setAttribute("type", "text");
+  var usernameTextBox = document.createElement("input");
+  usernameTextBox.setAttribute("id", "username-text-box");
   document.querySelector("#quiz-content").appendChild(usernamePrompt).setAttribute("id", "username-prompt");
-  document.querySelector("#username-prompt").innerHTML = "Please Enter Your Name:" + usernameTextBox;
-  
-
+  document.querySelector("#username-prompt").innerHTML = "Please Enter Your Name:";
+  document.querySelector("#quiz-content").appendChild(usernameTextBox);
+  var savedUsername = document.getElementById("username-text-box").value;
   var score = timeLeft;
-
+  if (document.getElementById("username-text-box").value != null) {
+    localStorage.setItem("username", savedUsername);
+    localStorage.setItem("score", score);
+  }
 }
+
 
 function openScores(){
 
