@@ -17,7 +17,7 @@ var ques = [
 
     {
      question: "How can you get a webpage to run JavaScript",
-     choices: ["It's automatic", "Use <script> in the HTML", "Use <script> in the CSS", "You can't"],
+     choices: ["It's automatic", "Use a script element in the HTML", "Use a script element in the CSS", "You can't"],
      answer: "alert()"
     },
 
@@ -69,9 +69,13 @@ function gamePlayStart() {
     document.getElementById("choice-c").addEventListener("click", checkAnswer);
     document.getElementById("choice-d").addEventListener("click", checkAnswer);
   }
-  if (globalQuestionIndex === 1 || globalQuestionIndex === 2) {
-    //Assign new inner HTML to question, remove <p> element
+  if (globalQuestionIndex === 1 || globalQuestionIndex === 2 || globalQuestionIndex === 3) {
+    //Assign new inner HTML to question, remove previous buttons
     document.getElementById("question").innerHTML = ques[globalQuestionIndex].question;
+    document.querySelector("#ans-choice-buttonA").remove();
+    document.querySelector("#ans-choice-buttonB").remove();
+    document.querySelector("#ans-choice-buttonC").remove();
+    document.querySelector("#ans-choice-buttonD").remove();
     //Generate Choices, append to element
     var ansButtonA = document.createElement("button");
     var ansButtonB = document.createElement("button");
@@ -99,8 +103,51 @@ function gamePlayStart() {
     document.getElementById("choice-c").addEventListener("click", checkAnswer);
     document.getElementById("choice-d").addEventListener("click", checkAnswer);
   }
-  gamePlayStart();
-  globalQuestionIndex++;
+  if (globalQuestionIndex === 4) {
+    //Assign new inner HTML to question, remove previous buttons
+    document.getElementById("question").innerHTML = ques[globalQuestionIndex].question;
+    document.getElementById("question").innerHTML = ques[globalQuestionIndex].question;
+    document.querySelector("#ans-choice-buttonA").remove();
+    document.querySelector("#ans-choice-buttonB").remove();
+    document.querySelector("#ans-choice-buttonC").remove();
+    document.querySelector("#ans-choice-buttonD").remove();
+    //Generate Choices, append to element
+    var ansButtonA = document.createElement("button");
+    var ansButtonB = document.createElement("button");
+    var ansButtonC = document.createElement("button");
+    var ansButtonD = document.createElement("button");
+    ansButtonA.innerHTML = ques[globalQuestionIndex].choices[0];
+    ansButtonB.innerHTML = ques[globalQuestionIndex].choices[1];
+    ansButtonC.innerHTML = ques[globalQuestionIndex].choices[2];
+    ansButtonD.innerHTML = ques[globalQuestionIndex].choices[3];
+    ansButtonA.setAttribute("id", "ans-choice-buttonA");
+    ansButtonB.setAttribute("id", "ans-choice-buttonB");
+    ansButtonC.setAttribute("id", "ans-choice-buttonC");
+    ansButtonD.setAttribute("id", "ans-choice-buttonD");
+    ansButtonA.setAttribute("value", ques[globalQuestionIndex].choices[0]);
+    ansButtonB.setAttribute("value", ques[globalQuestionIndex].choices[1]);
+    ansButtonC.setAttribute("value", ques[globalQuestionIndex].choices[2]);
+    ansButtonD.setAttribute("value", ques[globalQuestionIndex].choices[3]);
+    document.getElementById("choice-a").appendChild(ansButtonA);
+    document.getElementById("choice-b").appendChild(ansButtonB);
+    document.getElementById("choice-c").appendChild(ansButtonC);
+    document.getElementById("choice-d").appendChild(ansButtonD);
+    //Verify answer
+    document.getElementById("choice-a").addEventListener("click", checkAnswer);
+    document.getElementById("choice-b").addEventListener("click", checkAnswer);
+    document.getElementById("choice-c").addEventListener("click", checkAnswer);
+    document.getElementById("choice-d").addEventListener("click", checkAnswer);
+  }
+  if (globalQuestionIndex === 5) {
+    if ( window.confirm("Would you like to view the high scores?")) {
+      alert("Put the link to scores function")
+      //openScores();
+    }
+    else {
+      alert("said no, put link to scores function anyway lol")
+      //openScores();
+    }
+  }
 }
 
 function checkAnswer(event) {
@@ -109,16 +156,22 @@ function checkAnswer(event) {
   console.log(ansChoice);
   console.log(ques[globalQuestionIndex].answer)
   if (ansChoice === ques[globalQuestionIndex].answer) {
-    alert("right test");
-    console.log(globalQuestionIndex);
+    globalQuestionIndex++;
+    gamePlayStart();
   }
   else {
-    alert("wrong test");
+    timeLeft = timeLeft - 10;
     console.log(globalQuestionIndex);
+    globalQuestionIndex++;
+    gamePlayStart();
   }
 }
 
-function saveScore() {
+function saveScores() {
+
+}
+
+function openScores(){
 
 }
 
@@ -133,12 +186,14 @@ function countdown() {
         timeLeft--;
         }
       else if (timeLeft === 0) {
-        document.getElementById("game-time").innerHTML = "Time Remaining: " + timeLeft + " seconds left!";         
+        document.getElementById("game-time").innerHTML = "Time Remaining: " + timeLeft + " seconds left!"; 
+        alert("Sorry, you lose! Let's look at some winners scores.");        
+        //openScores();
         clearInterval(timer);
+
         }
     }, 1000);
   }
 
 document.getElementById("start-button").addEventListener("click", countdown);
 document.getElementById("start-button").addEventListener("click", gamePlayStart);
-//document.getElementById("submit-button").addEventListener("click", gamePlay);
