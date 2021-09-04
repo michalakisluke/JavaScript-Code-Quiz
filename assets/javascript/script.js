@@ -149,6 +149,9 @@ function gamePlayStart() {
     document.getElementById("choice-d").addEventListener("click", checkAnswer);
   }
   if (globalQuestionIndex === 5) {
+    document.getElementById("high-scores-game").removeEventListener("click", openScoresGame);
+    document.getElementById("high-scores-game").setAttribute("id", "high-scores-endgame");
+    document.getElementById("high-scores-endgame").addEventListener("click", openScoresEndgame);
     saveScores();
   }
 }
@@ -199,6 +202,7 @@ function storeData() {
 
 function openScoresHome(){
   scoresArray =  JSON.parse(window.localStorage.getItem('score'));
+  timeLeft = -1;
   document.querySelector("#title").innerHTML = "High Scores"
   document.querySelector("#start-prompt").remove();
   document.querySelector("#high-scores-homepage").remove();
@@ -207,12 +211,20 @@ function openScoresHome(){
   document.querySelector("#choice-b").remove();
   document.querySelector("#choice-c").remove();
   document.querySelector("#choice-d").remove();
-  document.querySelector("#start-button").innerHTML = "Go back";
-  document.querySelector("#start-button").setAttribute("id", "go-back");
-  document.querySelector("#go-back").addEventListener("click", location.reload);
+  document.querySelector("#start-button").remove();
+  var goBack = document.createElement("button");
+  goBack.innerHTML = "Go back";
+  goBack.setAttribute("id","go-back");
+  goBack.addEventListener("click", refreshPage);
   var scoresList = document.createElement("ul");
   scoresList.setAttribute("id", "scores-list");
   document.querySelector("#quiz-content").appendChild(scoresList);
+  document.querySelector("#quiz-content").appendChild(goBack);
+  var clearButton = document.createElement("button");
+  clearButton.setAttribute("id", "clear-button");
+  clearButton.innerHTML = "Clear High Scores";
+  document.querySelector("#quiz-content").appendChild(clearButton);
+  document.querySelector("#clear-button").addEventListener("click", clearScores);
   for (var i = 0; i < scoresArray.length; i++) {
     // Sort scores
     scoresArray.sort(function(a,b) {
@@ -240,6 +252,7 @@ function openScoresHome(){
 
 function openScoresGame(){
   scoresArray =  JSON.parse(window.localStorage.getItem('score'));
+  timeLeft = -1;
   document.querySelector("#question").innerHTML = "High Scores"
   document.querySelector("#high-scores-game").remove();
   document.querySelector("#game-time").remove();
@@ -250,11 +263,16 @@ function openScoresGame(){
   var goBack = document.createElement("button");
   goBack.innerHTML = "Go back";
   goBack.setAttribute("id","go-back");
-  goBack.addEventListener("click", location.reload);
+  goBack.addEventListener("click", refreshPage);
   var scoresList = document.createElement("ul");
   scoresList.setAttribute("id", "scores-list");
   document.querySelector("#quiz-content").appendChild(scoresList);
   document.querySelector("#quiz-content").appendChild(goBack);
+  var clearButton = document.createElement("button");
+  clearButton.setAttribute("id", "clear-button");
+  clearButton.innerHTML = "Clear High Scores";
+  document.querySelector("#quiz-content").appendChild(clearButton);
+  document.querySelector("#clear-button").addEventListener("click", clearScores);
   for (var i = 0; i < scoresArray.length; i++) {
     // Sort scores
     scoresArray.sort(function(a,b) {
@@ -280,6 +298,61 @@ function openScoresGame(){
   }
 }
 
+function openScoresEndgame(){
+  scoresArray =  JSON.parse(window.localStorage.getItem('score'));
+  timeLeft = -1;
+  document.querySelector("#score-save").innerHTML = "High Scores"
+  document.querySelector("#high-scores-endgame").remove();
+  document.querySelector("#game-time").remove();
+  document.querySelector("#username-prompt").remove();
+  document.querySelector("#username-text-box").remove();
+  document.querySelector("#username-save-button").remove();
+  var goBack = document.createElement("button");
+  goBack.innerHTML = "Go back";
+  goBack.setAttribute("id","go-back");
+  goBack.addEventListener("click", refreshPage);
+  var scoresList = document.createElement("ul");
+  scoresList.setAttribute("id", "scores-list");
+  document.querySelector("#quiz-content").appendChild(scoresList);
+  document.querySelector("#quiz-content").appendChild(goBack);
+  var clearButton = document.createElement("button");
+  clearButton.setAttribute("id", "clear-button");
+  clearButton.innerHTML = "Clear High Scores";
+  document.querySelector("#quiz-content").appendChild(clearButton);
+  document.querySelector("#clear-button").addEventListener("click", clearScores);
+  for (var i = 0; i < scoresArray.length; i++) {
+    // Sort scores
+    scoresArray.sort(function(a,b) {
+      let varA;
+      let varB;
+      varA = a[1];
+      varB = b[1];
+      if (varA < varB) {
+        return 1;
+      }
+      else if (varB < varA) {
+        return -1;
+      }
+      return 0;
+    });
+    // generate scores list
+    var placedScore = scoresArray[i][0];
+    var placedName = scoresArray[i][1];
+    var placed = document.createElement("li");
+    placed.setAttribute("id", "listed-scores");
+    placed.textContent = placedScore + " - " + placedName;
+    document.querySelector("#scores-list").appendChild(placed);
+  }
+}
+
+function refreshPage() {
+  location.reload();
+}
+
+function clearScores() {
+  localStorage.clear();
+}
+
 function countdown() {
     var timer = setInterval(function() {
       if (timeLeft > 1) {
@@ -299,7 +372,6 @@ function countdown() {
         clearInterval(timer);
       }
     }, 1000);
-
   }
 
 document.getElementById("start-button").addEventListener("click", countdown);
