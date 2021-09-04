@@ -80,41 +80,7 @@ function gamePlayStart() {
     document.getElementById("choice-c").addEventListener("click", checkAnswer);
     document.getElementById("choice-d").addEventListener("click", checkAnswer);
   }
-  if (globalQuestionIndex === 1 || globalQuestionIndex === 2 || globalQuestionIndex === 3) {
-    //Assign new inner HTML to question, remove previous buttons
-    document.getElementById("question").innerHTML = ques[globalQuestionIndex].question;
-    document.querySelector("#ans-choice-buttonA").remove();
-    document.querySelector("#ans-choice-buttonB").remove();
-    document.querySelector("#ans-choice-buttonC").remove();
-    document.querySelector("#ans-choice-buttonD").remove();
-    //Generate Choices, append to element
-    var ansButtonA = document.createElement("button");
-    var ansButtonB = document.createElement("button");
-    var ansButtonC = document.createElement("button");
-    var ansButtonD = document.createElement("button");
-    ansButtonA.innerHTML = ques[globalQuestionIndex].choices[0];
-    ansButtonB.innerHTML = ques[globalQuestionIndex].choices[1];
-    ansButtonC.innerHTML = ques[globalQuestionIndex].choices[2];
-    ansButtonD.innerHTML = ques[globalQuestionIndex].choices[3];
-    ansButtonA.setAttribute("id", "ans-choice-buttonA");
-    ansButtonB.setAttribute("id", "ans-choice-buttonB");
-    ansButtonC.setAttribute("id", "ans-choice-buttonC");
-    ansButtonD.setAttribute("id", "ans-choice-buttonD");
-    ansButtonA.setAttribute("value", ques[globalQuestionIndex].choices[0]);
-    ansButtonB.setAttribute("value", ques[globalQuestionIndex].choices[1]);
-    ansButtonC.setAttribute("value", ques[globalQuestionIndex].choices[2]);
-    ansButtonD.setAttribute("value", ques[globalQuestionIndex].choices[3]);
-    document.getElementById("choice-a").appendChild(ansButtonA);
-    document.getElementById("choice-b").appendChild(ansButtonB);
-    document.getElementById("choice-c").appendChild(ansButtonC);
-    document.getElementById("choice-d").appendChild(ansButtonD);
-    //Verify answer
-    document.getElementById("choice-a").addEventListener("click", checkAnswer);
-    document.getElementById("choice-b").addEventListener("click", checkAnswer);
-    document.getElementById("choice-c").addEventListener("click", checkAnswer);
-    document.getElementById("choice-d").addEventListener("click", checkAnswer);
-  }
-  if (globalQuestionIndex === 4) {
+  if (globalQuestionIndex === 1 || globalQuestionIndex === 2 || globalQuestionIndex === 3 || globalQuestionIndex === 4) {
     //Assign new inner HTML to question, remove previous buttons
     document.getElementById("question").innerHTML = ques[globalQuestionIndex].question;
     document.querySelector("#ans-choice-buttonA").remove();
