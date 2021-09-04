@@ -1,6 +1,7 @@
 var choiceLength = 4;
 var globalQuestionIndex = 0;
 var timeLeft = 60;
+var scoresArray = [];
 
 var ques = [
     {
@@ -152,7 +153,7 @@ function checkAnswer(event) {
     gamePlayStart();
   }
   else {
-    timeLeft = timeLeft - 10;
+    timeLeft = timeLeft - 5;
     console.log(globalQuestionIndex);
     globalQuestionIndex++;
     gamePlayStart();
@@ -174,7 +175,7 @@ function saveScores() {
   saveButton.setAttribute("id", "username-save-button");
   saveButton.innerHTML = "Save my score!"
   document.querySelector("#quiz-content").appendChild(usernamePrompt);
-  document.querySelector("#username-prompt").innerHTML = "Please Enter Your Name:";
+  document.querySelector("#username-prompt").innerHTML = "Please Enter Your Initials:";
   document.querySelector("#quiz-content").appendChild(usernameTextBox);
   document.querySelector("#quiz-content").appendChild(saveButton);
   document.querySelector("#username-save-button").addEventListener("click", storeData);
@@ -183,12 +184,12 @@ function saveScores() {
 function storeData() {
   var savedUsername = document.getElementById("username-text-box").value;
   var score = timeLeft + 1;
-  localStorage.setItem("username", savedUsername);
-  localStorage.setItem("score", score);
+  scoresArray.push([savedUsername, score]);
+  localStorage.setItem("score", scoresArray);
 }
 
 function openScores(){
-
+  alert("This works");
 }
 
 function countdown() {
@@ -216,3 +217,4 @@ function countdown() {
 
 document.getElementById("start-button").addEventListener("click", countdown);
 document.getElementById("start-button").addEventListener("click", gamePlayStart);
+document.getElementById("high-scores-homepage").addEventListener("click", openScores);
