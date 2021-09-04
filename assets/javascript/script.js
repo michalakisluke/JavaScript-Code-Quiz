@@ -202,7 +202,7 @@ function storeData() {
   console.log(scoresArray);
   scoresArray.push([savedUsername, score]);
   console.log(scoresArray);
-  localStorage.setItem("score", scoresArray);
+  localStorage.setItem("score", JSON.stringify(scoresArray));
 }
 
 function openScores(){
