@@ -4,11 +4,7 @@ var timeLeft = 60;
 let scoresArray; 
 
 function checkScore() {
-  var retrieve = localStorage.getItem('score');
-  scoresArray = retrieve;
-  if (scoresArray === null) {
-    scoresArray = [];
-  } 
+  scoresArray =  JSON.parse(window.localStorage.getItem('score')) || [];
 }
 
 console.log(localStorage.getItem('score'));
