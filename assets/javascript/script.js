@@ -206,7 +206,18 @@ function storeData() {
 }
 
 function openScores(){
-  alert("This works");
+  scoresArray =  JSON.parse(window.localStorage.getItem('score'));
+  document.querySelector("#title").innerHTML = "High Scores"
+  document.querySelector("#start-prompt").remove();
+  document.querySelector("#high-scores-homepage").remove();
+  document.querySelector("#game-time").remove();
+  document.querySelector("#choice-a").remove();
+  document.querySelector("#choice-b").remove();
+  document.querySelector("#choice-c").remove();
+  document.querySelector("#choice-d").remove();
+  document.querySelector("#start-button").innerHTML = "Go back";
+  document.querySelector("#start-button").setAttribute("id", "go-back");
+  document.querySelector("#go-back").addEventListener("click", location.reload());
 }
 
 function countdown() {
