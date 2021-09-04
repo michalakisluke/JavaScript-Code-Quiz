@@ -1,7 +1,15 @@
 var choiceLength = 4;
 var globalQuestionIndex = 0;
 var timeLeft = 60;
-var scoresArray = [];
+var scoresArray = localStorage.getItem(scoresArray);
+
+
+function checkScore() {
+  localStorage.getItem(scoresArray);
+  if (scoresArray === null) {
+    scoresArray = [];
+  }
+}
 
 var ques = [
     {
@@ -184,6 +192,7 @@ function saveScores() {
 function storeData() {
   var savedUsername = document.getElementById("username-text-box").value;
   var score = timeLeft + 1;
+  checkScore();
   scoresArray.push([savedUsername, score]);
   localStorage.setItem("score", scoresArray);
 }
