@@ -168,18 +168,24 @@ function saveScores() {
   document.querySelector("#choice-d").remove();
   var usernamePrompt = document.createElement("p");
   var usernameTextBox = document.createElement("input");
+  var saveButton = document.createElement("button");
+  usernamePrompt.setAttribute("id","username-prompt");
   usernameTextBox.setAttribute("id", "username-text-box");
-  document.querySelector("#quiz-content").appendChild(usernamePrompt).setAttribute("id", "username-prompt");
+  saveButton.setAttribute("id", "username-save-button");
+  saveButton.innerHTML = "Save my score!"
+  document.querySelector("#quiz-content").appendChild(usernamePrompt);
   document.querySelector("#username-prompt").innerHTML = "Please Enter Your Name:";
   document.querySelector("#quiz-content").appendChild(usernameTextBox);
-  var savedUsername = document.getElementById("username-text-box").value;
-  var score = timeLeft;
-  if (document.getElementById("username-text-box").value != null) {
-    localStorage.setItem("username", savedUsername);
-    localStorage.setItem("score", score);
-  }
+  document.querySelector("#quiz-content").appendChild(saveButton);
+  document.querySelector("#username-save-button").addEventListener("click", storeData);
 }
 
+function storeData() {
+  var savedUsername = document.getElementById("username-text-box").value;
+  var score = timeLeft + 1;
+  localStorage.setItem("username", savedUsername);
+  localStorage.setItem("score", score);
+}
 
 function openScores(){
 
