@@ -8,13 +8,7 @@ function checkScore() {
   scoresArray =  JSON.parse(window.localStorage.getItem('score')) || [];
 }
 
-console.log(localStorage.getItem('score'));
-console.log(scoresArray);
-
 checkScore();
-
-console.log(localStorage.getItem('score'));
-console.log(scoresArray);
 
 var ques = [
     {
@@ -159,8 +153,6 @@ function gamePlayStart() {
 function checkAnswer(event) {
   event.preventDefault();
   var ansChoice = event.target.value;
-  console.log(ansChoice);
-  console.log(ques[globalQuestionIndex].answer)
   if (ansChoice === ques[globalQuestionIndex].answer) {
     correctVar = 0;
     globalQuestionIndex++;
@@ -169,7 +161,6 @@ function checkAnswer(event) {
   else {
     timeLeft = timeLeft - 5;
     correctVar = 1;
-    console.log(globalQuestionIndex);
     globalQuestionIndex++;
     gamePlayStart();
   }
@@ -199,9 +190,7 @@ function saveScores() {
 function storeData() {
   var savedUsername = document.getElementById("username-text-box").value;
   var score = timeLeft + 1;
-  console.log(scoresArray);
   scoresArray.push([savedUsername, score]);
-  console.log(scoresArray);
   localStorage.setItem("score", JSON.stringify(scoresArray));
 }
 
@@ -217,7 +206,17 @@ function openScores(){
   document.querySelector("#choice-d").remove();
   document.querySelector("#start-button").innerHTML = "Go back";
   document.querySelector("#start-button").setAttribute("id", "go-back");
-  document.querySelector("#go-back").addEventListener("click", location.reload());
+  document.querySelector("#go-back").addEventListener("click", location.reload);
+  var scoresList = document.createElement("ul");
+  scoresList.setAttribute("id", "scores-list");
+  document.querySelector("#quiz-content").appendChild(scoresList);
+  for (var i = 0; i < scoresArray.legnth; i++) {
+    var placedScore = scoresArray[i][0];
+    var placedName = scoresArray[i][1];
+    var placed = document.createElement("li");
+    placed.textContent = placedScore + " - " + placedName;
+    document.querySelector("#quiz-content").appendChild(placed);
+  }
 }
 
 function countdown() {
