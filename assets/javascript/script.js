@@ -106,7 +106,6 @@ function gamePlayStart() {
   if (globalQuestionIndex === 4) {
     //Assign new inner HTML to question, remove previous buttons
     document.getElementById("question").innerHTML = ques[globalQuestionIndex].question;
-    document.getElementById("question").innerHTML = ques[globalQuestionIndex].question;
     document.querySelector("#ans-choice-buttonA").remove();
     document.querySelector("#ans-choice-buttonB").remove();
     document.querySelector("#ans-choice-buttonC").remove();
@@ -139,14 +138,7 @@ function gamePlayStart() {
     document.getElementById("choice-d").addEventListener("click", checkAnswer);
   }
   if (globalQuestionIndex === 5) {
-    if ( window.confirm("Would you like to view the high scores?")) {
-      alert("Put the link to scores function")
-      //openScores();
-    }
-    else {
-      alert("said no, put link to scores function anyway lol")
-      //openScores();
-    }
+    saveScores();
   }
 }
 
@@ -168,6 +160,19 @@ function checkAnswer(event) {
 }
 
 function saveScores() {
+  document.getElementById("question").setAttribute("id", "score-save");
+  document.getElementById("score-save").innerHTML = "Good Job! You scored " + timeLeft + " points!"
+  document.querySelector("#choice-a").remove();
+  document.querySelector("#choice-b").remove();
+  document.querySelector("#choice-c").remove();
+  document.querySelector("#choice-d").remove();
+  var usernamePrompt = document.createElement("p");
+  var usernameTextBox = document.createElement("input").setAttribute("type", "text");
+  document.querySelector("#quiz-content").appendChild(usernamePrompt).setAttribute("id", "username-prompt");
+  document.querySelector("#username-prompt").innerHTML = "Please Enter Your Name:" + usernameTextBox;
+  
+
+  var score = timeLeft;
 
 }
 
@@ -190,9 +195,12 @@ function countdown() {
         alert("Sorry, you lose! Let's look at some winners scores.");        
         //openScores();
         clearInterval(timer);
-
         }
+      if (globalQuestionIndex === 5) {
+        clearInterval(timer);
+      }
     }, 1000);
+
   }
 
 document.getElementById("start-button").addEventListener("click", countdown);
