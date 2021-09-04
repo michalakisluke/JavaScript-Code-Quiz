@@ -2,6 +2,7 @@ var choiceLength = 4;
 var globalQuestionIndex = 0;
 var timeLeft = 60;
 let scoresArray; 
+let correctVar;
 
 function checkScore() {
   scoresArray =  JSON.parse(window.localStorage.getItem('score')) || [];
@@ -161,11 +162,13 @@ function checkAnswer(event) {
   console.log(ansChoice);
   console.log(ques[globalQuestionIndex].answer)
   if (ansChoice === ques[globalQuestionIndex].answer) {
+    correctVar = 0;
     globalQuestionIndex++;
     gamePlayStart();
   }
   else {
     timeLeft = timeLeft - 5;
+    correctVar = 1;
     console.log(globalQuestionIndex);
     globalQuestionIndex++;
     gamePlayStart();
