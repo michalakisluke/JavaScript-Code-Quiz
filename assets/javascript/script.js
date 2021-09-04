@@ -47,6 +47,9 @@ function gamePlayStart() {
     // Modify page format, prep for introducing question
     document.querySelector("#start-button").remove();
     document.getElementById("title").setAttribute("id", "question");
+    document.querySelector("#high-scores-homepage").removeEventListener("click", openScoresHome);
+    document.querySelector("#high-scores-homepage").setAttribute("id", "high-scores-game")
+    document.getElementById("high-scores-game").addEventListener("click", openScoresGame);
     //Assign new inner HTML to question, remove <p> element
     document.getElementById("question").innerHTML = ques[globalQuestionIndex].question;
     document.getElementById("start-prompt").remove();
@@ -194,7 +197,7 @@ function storeData() {
   localStorage.setItem("score", JSON.stringify(scoresArray));
 }
 
-function openScores(){
+function openScoresHome(){
   scoresArray =  JSON.parse(window.localStorage.getItem('score'));
   document.querySelector("#title").innerHTML = "High Scores"
   document.querySelector("#start-prompt").remove();
@@ -210,12 +213,70 @@ function openScores(){
   var scoresList = document.createElement("ul");
   scoresList.setAttribute("id", "scores-list");
   document.querySelector("#quiz-content").appendChild(scoresList);
-  for (var i = 0; i < scoresArray.legnth; i++) {
+  for (var i = 0; i < scoresArray.length; i++) {
+    // Sort scores
+    scoresArray.sort(function(a,b) {
+      let varA;
+      let varB;
+      varA = a[1];
+      varB = b[1];
+      if (varA < varB) {
+        return 1;
+      }
+      else if (varB < varA) {
+        return -1;
+      }
+      return 0;
+    });
+    // generate scores list
     var placedScore = scoresArray[i][0];
     var placedName = scoresArray[i][1];
     var placed = document.createElement("li");
+    placed.setAttribute("id", "listed-scores");
     placed.textContent = placedScore + " - " + placedName;
-    document.querySelector("#quiz-content").appendChild(placed);
+    document.querySelector("#scores-list").appendChild(placed);
+  }
+}
+
+function openScoresGame(){
+  scoresArray =  JSON.parse(window.localStorage.getItem('score'));
+  document.querySelector("#question").innerHTML = "High Scores"
+  document.querySelector("#high-scores-game").remove();
+  document.querySelector("#game-time").remove();
+  document.querySelector("#choice-a").remove();
+  document.querySelector("#choice-b").remove();
+  document.querySelector("#choice-c").remove();
+  document.querySelector("#choice-d").remove();
+  var goBack = document.createElement("button");
+  goBack.innerHTML = "Go back";
+  goBack.setAttribute("id","go-back");
+  goBack.addEventListener("click", location.reload);
+  var scoresList = document.createElement("ul");
+  scoresList.setAttribute("id", "scores-list");
+  document.querySelector("#quiz-content").appendChild(scoresList);
+  document.querySelector("#quiz-content").appendChild(goBack);
+  for (var i = 0; i < scoresArray.length; i++) {
+    // Sort scores
+    scoresArray.sort(function(a,b) {
+      let varA;
+      let varB;
+      varA = a[1];
+      varB = b[1];
+      if (varA < varB) {
+        return 1;
+      }
+      else if (varB < varA) {
+        return -1;
+      }
+      return 0;
+    });
+    // generate scores list
+    var placedScore = scoresArray[i][0];
+    var placedName = scoresArray[i][1];
+    var placed = document.createElement("li");
+    placed.setAttribute("id", "listed-scores");
+    placed.textContent = placedScore + " - " + placedName;
+    document.querySelector("#scores-list").appendChild(placed);
   }
 }
 
@@ -231,8 +292,7 @@ function countdown() {
         }
       else if (timeLeft === 0) {
         document.getElementById("game-time").innerHTML = "Time Remaining: " + timeLeft + " seconds left!"; 
-        alert("Sorry, you lose! Let's look at some winners scores.");        
-        //openScores();
+        alert("Sorry, you lose! Refresh the page to play again!");        
         clearInterval(timer);
         }
       if (globalQuestionIndex === 5) {
@@ -244,4 +304,4 @@ function countdown() {
 
 document.getElementById("start-button").addEventListener("click", countdown);
 document.getElementById("start-button").addEventListener("click", gamePlayStart);
-document.getElementById("high-scores-homepage").addEventListener("click", openScores);
+document.getElementById("high-scores-homepage").addEventListener("click", openScoresHome);
