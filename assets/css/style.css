@@ -1,0 +1,22 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Courier New', Courier, monospace;
+};
+
+#header {
+    margin: 10px 0px 10px 0px;
+};
+
+header button {
+    float: left;
+}
+
+header p {
+    float: right;
+}
+
