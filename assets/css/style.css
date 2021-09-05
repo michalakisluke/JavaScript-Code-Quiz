@@ -6,17 +6,91 @@
 
 body {
     font-family: 'Courier New', Courier, monospace;
-};
+}
+
+button {
+    background-color: purple;
+    color: white;
+    border-color: purple;
+    border-radius: 5px;
+    transition-duration: 0.1s
+}
 
 #header {
-    margin: 10px 0px 10px 0px;
-};
-
-header button {
-    float: left;
+    position: relative;
+    padding: 10px 5px 10px 5px;
+    display: flex;
+    justify-content: space-between;
 }
 
-header p {
-    float: right;
+#header p {
+    left: 20px;
 }
 
+#quiz-content {
+    position: relative;
+    padding: 10px 5px 10px 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#question {
+    text-align: center;
+    font-size: 28px;
+}
+
+#previous-answer {
+    margin-top: 10px;
+    color: gray;
+}
+
+#title {
+    text-align: center;
+}
+
+#start-prompt {
+    text-align: center;
+    padding-top: 10px;
+}
+
+#start-button {
+    display: flex;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    top: 10px;
+    width: 200px;
+}
+
+#ans-choice-buttonA, #ans-choice-buttonB, #ans-choice-buttonC, #ans-choice-buttonD {
+    width: 300px;
+    margin-top: 5px;
+}
+
+button:hover {
+    background-color: lightpink;
+}
+
+#username-prompt {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+#username-text-box {
+    margin-top: 10px;
+}
+
+#username-save-button {
+    margin-top: 10px;
+}
+
+#go-back, #clear-button {
+    width: 300px;
+    margin-top: 5px;
+}
+
+#listed-scores {
+    font-weight: bold;
+}

@@ -24,7 +24,7 @@ var ques = [
     },
 
     {
-     question: "How can you get a webpage to run JavaScript",
+     question: "How can you get a webpage to run JavaScript?",
      choices: ["It's automatic", "Use a script element in the HTML", "Use a script element in the CSS", "You can't"],
      answer: "alert()"
     },
@@ -170,7 +170,7 @@ function saveScores() {
   saveButton.setAttribute("id", "username-save-button");
   saveButton.innerHTML = "Save my score!"
   document.querySelector("#quiz-content").appendChild(usernamePrompt);
-  document.querySelector("#username-prompt").innerHTML = "Please Enter Your Initials:";
+  document.querySelector("#username-prompt").innerHTML = "Please Enter Your Initials and Click Save, then Click High Scores to see the Leaderboard!";
   document.querySelector("#quiz-content").appendChild(usernameTextBox);
   document.querySelector("#quiz-content").appendChild(saveButton);
   document.querySelector("#username-save-button").addEventListener("click", storeData);
@@ -196,10 +196,10 @@ function openScoresHome(){
   document.querySelector("#choice-d").remove();
   document.querySelector("#start-button").remove();
   var goBack = document.createElement("button");
-  goBack.innerHTML = "Go back";
+  goBack.innerHTML = "Go Back";
   goBack.setAttribute("id","go-back");
   goBack.addEventListener("click", refreshPage);
-  var scoresList = document.createElement("ul");
+  var scoresList = document.createElement("ol");
   scoresList.setAttribute("id", "scores-list");
   document.querySelector("#quiz-content").appendChild(scoresList);
   document.querySelector("#quiz-content").appendChild(goBack);
@@ -245,10 +245,10 @@ function openScoresGame(){
   document.querySelector("#choice-c").remove();
   document.querySelector("#choice-d").remove();
   var goBack = document.createElement("button");
-  goBack.innerHTML = "Go back";
+  goBack.innerHTML = "Go Back";
   goBack.setAttribute("id","go-back");
   goBack.addEventListener("click", refreshPage);
-  var scoresList = document.createElement("ul");
+  var scoresList = document.createElement("ol");
   scoresList.setAttribute("id", "scores-list");
   document.querySelector("#quiz-content").appendChild(scoresList);
   document.querySelector("#quiz-content").appendChild(goBack);
@@ -293,10 +293,10 @@ function openScoresEndgame(){
   document.querySelector("#username-text-box").remove();
   document.querySelector("#username-save-button").remove();
   var goBack = document.createElement("button");
-  goBack.innerHTML = "Go back";
+  goBack.innerHTML = "Go Back";
   goBack.setAttribute("id","go-back");
   goBack.addEventListener("click", refreshPage);
-  var scoresList = document.createElement("ul");
+  var scoresList = document.createElement("ol");
   scoresList.setAttribute("id", "scores-list");
   document.querySelector("#quiz-content").appendChild(scoresList);
   document.querySelector("#quiz-content").appendChild(goBack);
