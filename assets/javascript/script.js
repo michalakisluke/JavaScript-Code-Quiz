@@ -74,6 +74,10 @@ function gamePlayStart() {
     document.getElementById("choice-b").appendChild(ansButtonB);
     document.getElementById("choice-c").appendChild(ansButtonC);
     document.getElementById("choice-d").appendChild(ansButtonD);
+    //Create h2 to display right or wrong
+    var prevAns = document.createElement("h2");
+    prevAns.setAttribute("id", "previous-answer");
+    document.querySelector("#quiz-content").appendChild(prevAns);
     //Verify answer
     document.getElementById("choice-a").addEventListener("click", checkAnswer);
     document.getElementById("choice-b").addEventListener("click", checkAnswer);
@@ -108,6 +112,13 @@ function gamePlayStart() {
     document.getElementById("choice-b").appendChild(ansButtonB);
     document.getElementById("choice-c").appendChild(ansButtonC);
     document.getElementById("choice-d").appendChild(ansButtonD);
+    //Write to h2
+    if (correctVar === 0) {
+      document.getElementById("previous-answer").innerHTML = "Your last answer was right!";
+    }
+    if (correctVar === 1) {
+      document.getElementById("previous-answer").innerHTML = "Your last answer was wrong!";
+    }
     //Verify answer
     document.getElementById("choice-a").addEventListener("click", checkAnswer);
     document.getElementById("choice-b").addEventListener("click", checkAnswer);
@@ -118,6 +129,12 @@ function gamePlayStart() {
     document.getElementById("high-scores-game").removeEventListener("click", openScoresGame);
     document.getElementById("high-scores-game").setAttribute("id", "high-scores-endgame");
     document.getElementById("high-scores-endgame").addEventListener("click", openScoresEndgame);
+    if (correctVar === 0) {
+      document.getElementById("previous-answer").innerHTML = "Your last answer was right!";
+    }
+    if (correctVar === 1) {
+      document.getElementById("previous-answer").innerHTML = "Your last answer was wrong!";
+    }
     saveScores();
   }
 }
@@ -219,6 +236,7 @@ function openScoresHome(){
 function openScoresGame(){
   scoresArray =  JSON.parse(window.localStorage.getItem('score'));
   timeLeft = -1;
+  document.getElementById("previous-answer").remove();
   document.querySelector("#question").innerHTML = "High Scores"
   document.querySelector("#high-scores-game").remove();
   document.querySelector("#game-time").remove();
@@ -267,6 +285,7 @@ function openScoresGame(){
 function openScoresEndgame(){
   scoresArray =  JSON.parse(window.localStorage.getItem('score'));
   timeLeft = -1;
+  document.getElementById("previous-answer").remove();
   document.querySelector("#score-save").innerHTML = "High Scores"
   document.querySelector("#high-scores-endgame").remove();
   document.querySelector("#game-time").remove();
